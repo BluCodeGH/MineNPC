@@ -1,0 +1,20 @@
+ChoicesExample
+3 Hello, I'm an example NPC showing off branching speech.
+/branch Look, a choice! Should you | do this | or this | or maybe this
+  2 You chose the first option
+  /branch Nesting works too! | Thats cool! | Ehh
+    2 Yay!
+  /next
+    2 Well I think its cool.
+  /next
+/next
+  3 you chose the second option
+  /branch Nesting works too! | Thats cool! | Ehh
+    2 Yay!
+  /next
+    2 Well I think its cool.
+  /next
+/next
+  2 You picked the third.
+/next
+3 You should go back and try another option. Just walk about 10 blocks away and wait 15 seconds for me to reset. For now, bye!
