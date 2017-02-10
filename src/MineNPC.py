@@ -281,7 +281,7 @@ if __name__ == '__main__':
     res = speaker.setup()
   if pyp:
     pyperclip.copy(res)
-    print("Copied command to clipboard. Press CTRL+V in a command block to paste it.")
+    print("Copied command to clipboard. Paste it into a command block to use it.")
   else:
     print("\n\n" + res)
   input("\n\nPress enter to quit.")
