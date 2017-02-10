@@ -3,7 +3,7 @@ BasicExample
 5 I can have custom delays between lines, and I'll stop talking if you walk away.
 3 Go, try it!
 4 Be careful though, if you stay away too long (15 seconds) I'll reset.
-/give @a [r=7] minecraft:stone
+/give @a[r=7] minecraft:stone
 3 I can also run commands at specific times too!
 4 Try some other examples to learn about the more advanced mechanics.
 2 Have a nice day!
