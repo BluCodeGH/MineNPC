@@ -84,11 +84,12 @@ class Speaker:
           branches.append([self.tick, 1, len(data), 0, []]) #[the tick for each new branch to begin at, the # of branches that are done, total # of branches to setup, the max duration, list of z values of blockdata cmds to be updated]
           options = ',{"text":"'
           for i, option in enumerate(data):
+            self.comm += '{id:commandblock_minecart,Command:scoreboard objectives add ' + self.name + str(len(branches)) + str(i) + " trigger},"
+            self.comm += '{id:commandblock_minecart,Command:scoreboard players enable @a ' + self.name + str(len(branches)) + str(i) + "},"
             extra = ""
             if i + 1 == len(data):
               extra += "?"
-            #json magyk. |num1num2 will be the inverse of the z difference between the marker and the place to setblock the redstone block.
-            options += '[' + option + ']' + extra + ' ","color":"red","bold":true,"clickEvent":{"action":"run_command","value":"/execute @e[tag=mark,name=' + self.name + '] ~ ~ ~ setblock ~ ~-1 ~-|' + str(len(branches)) + str(i) + ' redstone_block"}},{"text":"'
+            options += '[' + option + ']' + extra + ' ","color":"red","bold":true,"clickEvent":{"action":"run_command","value":"/trigger ' + self.name + str(len(branches)) + str(i) + ' set 1"}},{"text":"'
           options = options[:-10].replace("|" + str(len(branches)) + "0", str(z + 2)) #first location to set redstone block
 
           self.tick -= 1
@@ -100,6 +101,9 @@ class Speaker:
 
           self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z) + " command_block 2 replace {Command:scoreboard players set @e[tag=talks,name=" + self.name + "] speech " + str(self.tick) + "}}," #these activate when the player chooses. reset speech score.
           self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z + 1) + " chain_command_block 2 replace {auto:1b,Command:blockdata ~ ~-1 ~-|a" + str(len(branches)) + "0 {auto:1b}}}," #blockdata the repeat cmd that activates after the branch to auto
+          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.name + str(len(branches)) + "0=1,score_" + self.name + str(len(branches)) + "0_min=1] " + self.name + str(len(branches)) + "0 0}},"
+          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.name + str(len(branches)) + "0}},"
+          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 2) + " chain_command_block 10 replace {auto:1b,Command:execute @e[name=" + self.name + ",tag=talks,score_speech_min=|f] ~ ~ ~ execute @e[name=" + self.name + ",tag=mark] ~ ~ ~ setblock ~ ~-1 ~-" + str(z) + " minecraft:redstone_block}},"
           branches[-1][4].append(z + 1) #add the previous cmd's z to the list
 
           nextRepeat = True #make the next command a needs redstone repeat, as it will be the first command in the branch.
@@ -122,6 +126,9 @@ class Speaker:
 
             self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z) + " command_block 2 replace {Command:scoreboard players set @e[tag=talks,name=" + self.name + "] speech " + str(branches[-1][0]) + "}}," #set the speak score
             self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z + 1) + " chain_command_block 2 replace {auto:1b,Command:blockdata ~ ~-1 ~-|a" + str(len(branches)) + str(branches[-1][1]) + " {auto:1b}}}," #blockdata the repeat
+            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.name + str(len(branches)) + "0=1,score_" + self.name + str(len(branches)) + str(branches[-1][1]) + "_min=1] " + self.name + str(len(branches)) + str(branches[-1][1]) + " 0}},"
+            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.name + str(len(branches)) + str(branches[-1][1]) + "}},"
+            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 2) + " chain_command_block 10 replace {auto:1b,Command:execute @e[name=" + self.name + ",tag=talks,score_speech_min=|f] ~ ~ ~ execute @e[name=" + self.name + ",tag=mark] ~ ~ ~ setblock ~ ~-1 ~-" + str(z) + " minecraft:redstone_block}},"
             branches[-1][4].append(z + 1) #add the previous cmd's z to the list
 
             if self.tick > branches[-1][3]: #update the longest duration if needed
@@ -210,9 +217,7 @@ class Speaker:
 
   def framework(self):
     self.comm += "summon falling_block ~ ~1.5 ~ {Block:stone,Time:1,Passengers:[{id:falling_block,Block:redstone_block,Time:1,Passengers:[{id:falling_block,Block:activator_rail,Time:1},{id:commandblock_minecart,Command:gamerule commandBlockOutput false},"
-    self.comm += "{id:commandblock_minecart,Command:fill ~ ~-3 ~ ~ ~-2 ~-|l air 0 replace repeating_command_block},"
-    self.comm += "{id:commandblock_minecart,Command:fill ~ ~-3 ~ ~ ~-2 ~-|l air 0 replace chain_command_block},"
-    self.comm += "{id:commandblock_minecart,Command:fill ~ ~-3 ~ ~ ~-2 ~-|l air 0 replace command_block},"
+    self.comm += "{id:commandblock_minecart,Command:fill ~ ~-3 ~-1 ~ ~-1 ~-|l air},"
 
   def getData(self, filename):
     with open(filename, "r") as f:
