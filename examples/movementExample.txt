@@ -1,7 +1,9 @@
 MovementExample
 2 Hello! I'm the movement example!
+1 Keep up or I'll have to stop and wait for you.
 /move n 5 5
-5 Keep up or I'll have to stop and wait for you.
+/wait 5
+1 I can also move at different speeds!
 /move s 5 2
-2 I can also move at different speeds!
+/wait 2
 2 Thats it! Cya!

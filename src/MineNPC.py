@@ -50,6 +50,9 @@ class Speaker:
     for line in lines: #main loop
       line = line.lstrip()
 
+      if line == "" or line[0] == "#": #ignore comments and blank lines.
+        continue
+
       line, old_dur, nextRepeat, notAuto, dv, block, auto = self.checks(line, old_dur, z, nextRepeat, notAuto) #check for block, data value and auto
 
       if line[0] != "/": #plain text
