@@ -1,4 +1,5 @@
 from random import randint
+import sys
 try:
   import pyperclip
   pyp = True
@@ -220,8 +221,12 @@ class Speaker:
     self.comm += "{id:commandblock_minecart,Command:fill ~ ~-3 ~-1 ~ ~-1 ~-|l air},"
 
   def getData(self, filename):
-    with open(filename, "r") as f:
-      text = f.read()
+    try:
+      with open(filename, "r") as f:
+        text = f.read()
+    except FileNotFoundError:
+      print("Oops! You seem to have inputted an incorrect file. Please verify your input.")
+      sys.exit(1)
     lines = text.split("\n")
     self.name = lines[0]
     if len(self.name.split()) > 1:
