@@ -17,19 +17,18 @@ class Speaker:
     self.comm += "{id:commandblock_minecart,Command:scoreboard objectives add awayTime dummy},"
     self.comm += "{id:commandblock_minecart,Command:scoreboard teams add NPC},"
     self.comm += "{id:commandblock_minecart,Command:scoreboard teams option NPC collisionRule never},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-1 minecraft:repeating_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_speech_min=1] ~ ~ ~ execute @r[r=7] ~ ~ ~ /scoreboard players add @e[tag=talks,score_speech_min=1,r=7] speech 1}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-2 minecraft:chain_command_block 2 replace {auto:1b,Command:execute @e[tag=talks,score_speech_min=1] ~ ~ ~ scoreboard players add @e[tag=talks,r=0,score_speech_min=1] awayTime 1}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-3 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @a ~ ~ ~ execute @e[tag=talks,r=8] ~ ~ ~ scoreboard players set @e[tag=talks,r=0] awayTime 0}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-4 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_awayTime_min=300] ~ ~ ~ scoreboard players operation @e[tag=talks,r=0] speech = @e[tag=talks,r=0] speechMax}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-5 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_awayTime_min=300] ~ ~ ~ scoreboard players set @e[tag=talks,r=0] awayTime 0}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-6 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @a[score_rightClick_min=1] ~ ~ ~ /scoreboard players set @e[r=4,score_speech=0] speech 1}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-7 minecraft:chain_command_block 2 replace {auto:1b,Command:/scoreboard players set @a[score_rightClick_min=1] rightClick 0}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-8 minecraft:chain_command_block 2 replace {auto:1b,Command:/effect @e[tag=talks] minecraft:slowness 10 225 true}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-9 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks] ~ ~ ~ execute @r[r=7] ~ ~ ~ /scoreboard players add @e[tag=talks,r=7] speech 0}},"
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-10 minecraft:chain_command_block 2 replace {auto:1b,Command:/scoreboard players add @a qs 0}},"
-    self.comm += '{id:commandblock_minecart,Command:setblock ~ ~-2 ~-1 minecraft:standing_sign 8 replace {Text1:"{\\\\"text\\\\":\\\\"MineNPC Main\\\\",\\\\"bold\\\\":true,\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text2:"{\\\\"text\\\\":\\\\"By BluCode\\\\",\\\\"color\\\\":\\\\"blue\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text3:"{\\\\"text\\\\":\\\\"Right-Click to\\\\",\\\\"color\\\\":\\\\"red\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text4:"{\\\\"text\\\\":\\\\"Remove\\\\",\\\\"color\\\\":\\\\"red\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}"}},'
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~ minecraft:repeating_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_speech_min=1] ~ ~ ~ execute @r[r=7] ~ ~ ~ /scoreboard players add @e[tag=talks,score_speech_min=1,r=7] speech 1}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-1 minecraft:chain_command_block 2 replace {auto:1b,Command:execute @e[tag=talks,score_speech_min=1] ~ ~ ~ scoreboard players add @e[tag=talks,r=0,score_speech_min=1] awayTime 1}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-2 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @a ~ ~ ~ execute @e[tag=talks,r=8] ~ ~ ~ scoreboard players set @e[tag=talks,r=0] awayTime 0}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-3 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_awayTime_min=300] ~ ~ ~ scoreboard players operation @e[tag=talks,r=0] speech = @e[tag=talks,r=0] speechMax}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-4 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks,score_awayTime_min=300] ~ ~ ~ scoreboard players set @e[tag=talks,r=0] awayTime 0}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-5 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @a[score_rightClick_min=1] ~ ~ ~ /scoreboard players set @e[r=4,score_speech=0] speech 1}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-6 minecraft:chain_command_block 2 replace {auto:1b,Command:/scoreboard players set @a[score_rightClick_min=1] rightClick 0}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-7 minecraft:chain_command_block 2 replace {auto:1b,Command:/execute @e[tag=talks] ~ ~ ~ execute @r[r=7] ~ ~ ~ /scoreboard players add @e[tag=talks,r=7] speech 0}},"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-8 minecraft:chain_command_block 2 replace {auto:1b,Command:/scoreboard players add @a qs 0}},"
+    self.comm += '{id:commandblock_minecart,Command:setblock ~ ~-2 ~ minecraft:standing_sign 8 replace {Text1:"{\\\\"text\\\\":\\\\"MineNPC Main\\\\",\\\\"bold\\\\":true,\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text2:"{\\\\"text\\\\":\\\\"By BluCode\\\\",\\\\"color\\\\":\\\\"blue\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text3:"{\\\\"text\\\\":\\\\"Right-Click to\\\\",\\\\"color\\\\":\\\\"red\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}",Text4:"{\\\\"text\\\\":\\\\"Remove\\\\",\\\\"color\\\\":\\\\"red\\\\",\\\\"clickEvent\\\\":{\\\\"action\\\\":\\\\"run_command\\\\",\\\\"value\\\\":\\\\"fill ~ ~ ~ ~ ~-1 ~-9 air\\\\"}}"}},'
     self.comm += '{id:commandblock_minecart,Command:tellraw @a ["",{"text":"Successfully setup speech for all NPCs in this world.","color":"blue"}]},'
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~1 ~ command_block 0 0 {auto:1,Command:fill ~ ~-4 ~ ~ ~ ~ air}},{id:commandblock_minecart,Command:kill @e[type=commandblock_minecart,r=1]}]}]}"
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~1 ~ command_block 0 0 {auto:1,Command:fill ~ ~-3 ~ ~ ~ ~ air}},{id:commandblock_minecart,Command:kill @e[type=commandblock_minecart,r=1]}]}]}"
     return self.comm
 
   def speak(self, file):
@@ -85,12 +84,12 @@ class Speaker:
           branches.append([self.tick, 1, len(data), 0, []]) #[the tick for each new branch to begin at, the # of branches that are done, total # of branches to setup, the max duration, list of z values of blockdata cmds to be updated]
           options = ',{"text":"'
           for i, option in enumerate(data):
-            self.comm += '{id:commandblock_minecart,Command:scoreboard objectives add ' + self.name + str(len(branches)) + str(i) + " trigger},"
-            self.comm += '{id:commandblock_minecart,Command:scoreboard players enable @a ' + self.name + str(len(branches)) + str(i) + "},"
+            self.comm += '{id:commandblock_minecart,Command:scoreboard objectives add ' + self.getTrigger(branches, i) + " trigger},"
+            self.comm += '{id:commandblock_minecart,Command:scoreboard players enable @a ' + self.getTrigger(branches, i) + "},"
             extra = ""
             if i + 1 == len(data):
               extra += "?"
-            options += '[' + option + ']' + extra + ' ","color":"red","bold":true,"clickEvent":{"action":"run_command","value":"/trigger ' + self.name + str(len(branches)) + str(i) + ' set 1"}},{"text":"'
+            options += '[' + option + ']' + extra + ' ","color":"red","bold":true,"clickEvent":{"action":"run_command","value":"/trigger ' + self.getTrigger(branches, i) + ' set 1"}},{"text":"'
           options = options[:-10].replace("|" + str(len(branches)) + "0", str(z + 2)) #first location to set redstone block
 
           self.tick -= 1
@@ -102,8 +101,8 @@ class Speaker:
 
           self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z) + " command_block 2 replace {Command:scoreboard players set @e[tag=talks,name=" + self.name + "] speech " + str(self.tick) + "}}," #these activate when the player chooses. reset speech score.
           self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z + 1) + " chain_command_block 2 replace {auto:1b,Command:blockdata ~ ~-1 ~-|a" + str(len(branches)) + "0 {auto:1b}}}," #blockdata the repeat cmd that activates after the branch to auto
-          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.name + str(len(branches)) + "0=1,score_" + self.name + str(len(branches)) + "0_min=1] " + self.name + str(len(branches)) + "0 0}},"
-          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.name + str(len(branches)) + "0}},"
+          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.getTrigger(branches, 0) + "=1,score_" + self.getTrigger(branches, 0) + "_min=1] " + self.getTrigger(branches, 0) + " 0}},"
+          self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.getTrigger(branches, 0) + "}},"
           self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 2) + " chain_command_block 10 replace {auto:1b,Command:execute @e[name=" + self.name + ",tag=talks,score_speech_min=|f] ~ ~ ~ execute @e[name=" + self.name + ",tag=mark] ~ ~ ~ setblock ~ ~-1 ~-" + str(z) + " minecraft:redstone_block}},"
           branches[-1][4].append(z + 1) #add the previous cmd's z to the list
 
@@ -120,15 +119,16 @@ class Speaker:
             self.comm += self.base(0, z, block, dv, auto) + "scoreboard players set " + self.base(2) + " speech |t" + str(len(branches)) + "}}," #|tnum1 is the tick the longest branch ends at. finish off the previous branch.
             z += 1
 
-            if block == " repeating_command_block": #make space so two repeats aren't powered with 1 redstone block.
+            if block == " repeating_command_block": #make space so two repeats aren't powered with 1 redstone block, add dummy block so theres no gap
+              self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2},"
               z += 1
 
             self.comm = self.comm.replace("|" + str(len(branches)) + str(branches[-1][1]), str(z)) #next redstone block location
 
             self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z) + " command_block 2 replace {Command:scoreboard players set @e[tag=talks,name=" + self.name + "] speech " + str(branches[-1][0]) + "}}," #set the speak score
             self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-2 ~-" + str(z + 1) + " chain_command_block 2 replace {auto:1b,Command:blockdata ~ ~-1 ~-|a" + str(len(branches)) + str(branches[-1][1]) + " {auto:1b}}}," #blockdata the repeat
-            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.name + str(len(branches)) + "0=1,score_" + self.name + str(len(branches)) + str(branches[-1][1]) + "_min=1] " + self.name + str(len(branches)) + str(branches[-1][1]) + " 0}},"
-            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.name + str(len(branches)) + str(branches[-1][1]) + "}},"
+            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z) + " repeating_command_block 2 replace {auto:1b,Command:scoreboard players set @a[score_" + self.getTrigger(branches) + "=1,score_" + self.getTrigger(branches) + "_min=1] " + self.getTrigger(branches) + " 0}},"
+            self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 1) + " chain_command_block 10 replace {auto:1b,Command:scoreboard players enable @a " + self.getTrigger(branches) + "}},"
             self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-1 ~-" + str(z + 2) + " chain_command_block 10 replace {auto:1b,Command:execute @e[name=" + self.name + ",tag=talks,score_speech_min=|f] ~ ~ ~ execute @e[name=" + self.name + ",tag=mark] ~ ~ ~ setblock ~ ~-1 ~-" + str(z) + " minecraft:redstone_block}},"
             branches[-1][4].append(z + 1) #add the previous cmd's z to the list
 
@@ -202,7 +202,7 @@ class Speaker:
     self.comm += '{id:commandblock_minecart,Command:scoreboard players tag @e[tag=talks,name=' + self.name + '] add old},'
     self.comm += '{id:commandblock_minecart,Command:scoreboard players tag @e[tag=mark,name=' + self.name + '] add old},'
     #summon new villager and mark
-    self.comm += '{id:commandblock_minecart,Command:summon villager ~ ~ ~ {CustomName:"' + self.name + '",CustomNameVisible:1,Tags:["talks"],Offers:{Recipes:[]},Profession:' + str(randint(0,4)) + ',Invulnerable:1,PersistenceRequired:1,Silent:1}},'
+    self.comm += '{id:commandblock_minecart,Command:summon villager ~ ~ ~ {CustomName:"' + self.name + '",CustomNameVisible:1,Tags:["talks"],Attributes:[{Name:generic.movementSpeed,Base:0}],Offers:{Recipes:[]},Profession:' + str(randint(0,4)) + ',Invulnerable:1,PersistenceRequired:1,Silent:1}},'
     self.comm += '{id:commandblock_minecart,Command:summon armor_stand ~ ~-2 ~ {CustomName:"'+ self.name + '",CustomNameVisible:0,Tags:["mark"],Marker:1b,NoGravity:1b,Invisible:1,Invulnerable:1,PersistenceRequired:1}},'
     #setup new villager and kill old
     self.comm += '{id:commandblock_minecart,Command:scoreboard players set @e[tag=talks,tag=!old,name=' + self.name + '] speechMax ' + str(self.tick + 400) + "},"
@@ -226,6 +226,7 @@ class Speaker:
         text = f.read()
     except FileNotFoundError:
       print("Oops! You seem to have inputted an incorrect file. Please verify your input.")
+      input("\n\nPress enter to quit.")
       sys.exit(1)
     lines = text.split("\n")
     self.name = lines[0]
@@ -280,6 +281,19 @@ class Speaker:
 
   def all(self, s):
     return s.replace("@a", '","color":"green"},{"selector":"@a","color":"green"},{"text":"')
+
+  def getTrigger(self, branches, n=None):
+    trigger = ""
+    trigger += self.name
+    for i, branch in enumerate(branches):
+      if i + 1 == len(branches):
+        if n is not None:
+          trigger += str(n)
+        else:
+          trigger += str(branch[1])
+      else:
+        trigger += str(branch[1] - 1)
+    return trigger
 
 if __name__ == '__main__':
   print("Welcome to MineNPC, a program written with care by BluCode.")
