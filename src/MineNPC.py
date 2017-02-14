@@ -47,6 +47,10 @@ class Speaker:
     nextRepeat = False
     notAuto = False
 
+    line, old_dur, nextRepeat, notAuto, dv, block, auto = self.checks("NONE", old_dur, z, nextRepeat, notAuto)
+    self.comm += self.base(1, z, block, dv, auto) + 'summon armor_stand ~ ~ ~ {CustomName:"'+ self.name + '",CustomNameVisible:0,Tags:["start"],Marker:1b,NoGravity:1b,Invisible:1,Invulnerable:1,PersistenceRequired:1}}},'
+    z += 1
+
     for line in lines: #main loop
       line = line.lstrip()
 
@@ -169,6 +173,10 @@ class Speaker:
             direction = " ~" + str(speed) + " ~ ~"
           elif direction == "w":
             direction = " ~-" + str(speed) + " ~ ~"
+          elif direction == "u":
+            direction = " ~ ~" + str(speed) + " ~"
+          elif direction == "d":
+            direction = " ~ ~-" + str(speed) + " ~"
           else:
             raise ValueError
           selector = '@e[name=' + self.name + ',score_speech_min=' + str(self.tick) + ',score_speech=' + str(self.tick + time) + ']'
@@ -188,14 +196,19 @@ class Speaker:
         block = " repeating_command_block"
       else:
         block = " chain_command_block"
-      self.comm += self.base(0, z, block, " 2 ", "1") + "execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 400) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ execute @e[name=' + self.name + ',tag=mark] ~ ~ ~ /blockdata ~ ~-1 ~-' + str(z2) + ' {auto:0b}}},'
+      self.comm += self.base(0, z, block, " 2 ", "1") + "execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 399) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ execute @e[name=' + self.name + ',tag=mark] ~ ~ ~ /blockdata ~ ~-1 ~-' + str(z2) + ' {auto:0b}}},'
       z += 1
 
     #remove redstone blocks
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" +self.name + ",score_speech_min=" + str(self.tick + 400) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ execute @e[tag=mark,name=' +self.name + '] ~ ~ ~ fill ~ ~-1 ~-1 ~ ~-1 ~-|l air 0 replace redstone_block}},'
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 399) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ execute @e[tag=mark,name=' +self.name + '] ~ ~ ~ fill ~ ~-1 ~-1 ~ ~-1 ~-|l air 0 replace redstone_block}},'
+    z += 1
+    #tp back to start
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 399) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ tp @e[tag=talks,r=0] @e[tag=start,name=' + self.name + ']}},'
+    z += 1
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 399) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ kill @e[tag=start,name=' + self.name + ']}},'
     z += 1
     #reset speech score
-    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" +self.name + ",score_speech_min=" + str(self.tick + 400) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ scoreboard players set @e[name=' +self.name + ',r=0] speech 0}},'
+    self.comm += "{id:commandblock_minecart,Command:setblock ~ ~-3 ~-" + str(z) + " chain_command_block 2 replace {auto:1b,Command:execute @e[name=" + self.name + ",score_speech_min=" + str(self.tick + 399) + ',score_speech=' + str(self.tick + 400) +'] ~ ~ ~ scoreboard players set @e[name=' +self.name + ',r=0] speech 0}},'
     #update length and finish tick
     self.comm = self.comm.replace("|l", str(z+1)).replace("|f", str(self.tick))
     #add old tag to old villager and mark
@@ -205,7 +218,7 @@ class Speaker:
     self.comm += '{id:commandblock_minecart,Command:summon villager ~ ~ ~ {CustomName:"' + self.name + '",CustomNameVisible:1,Tags:["talks"],Attributes:[{Name:generic.movementSpeed,Base:0}],Offers:{Recipes:[]},Profession:' + str(randint(0,4)) + ',Invulnerable:1,PersistenceRequired:1,Silent:1}},'
     self.comm += '{id:commandblock_minecart,Command:summon armor_stand ~ ~-2 ~ {CustomName:"'+ self.name + '",CustomNameVisible:0,Tags:["mark"],Marker:1b,NoGravity:1b,Invisible:1,Invulnerable:1,PersistenceRequired:1}},'
     #setup new villager and kill old
-    self.comm += '{id:commandblock_minecart,Command:scoreboard players set @e[tag=talks,tag=!old,name=' + self.name + '] speechMax ' + str(self.tick + 400) + "},"
+    self.comm += '{id:commandblock_minecart,Command:scoreboard players set @e[tag=talks,tag=!old,name=' + self.name + '] speechMax ' + str(self.tick + 399) + "},"
     self.comm += '{id:commandblock_minecart,Command:scoreboard teams join NPC @e[tag=talks,tag=!old,name=' + self.name + ']},'
     self.comm += '{id:commandblock_minecart,Command:tp @e[tag=talks,tag=!old,name=' + self.name + '] @e[tag=old,tag=talks,rm=1,name=' + self.name + ']},'
     self.comm += '{id:commandblock_minecart,Command:kill @e[tag=old,name=' + self.name + ']},'
@@ -306,6 +319,7 @@ if __name__ == '__main__':
   if pyp:
     pyperclip.copy(res)
     print("Copied command to clipboard. Paste it into a command block to use it.")
+    print("The command is " + str(len(res)) + " characters long, which is " + str(int((len(res) / 32767) * 100)) + "% of the limit.")
   else:
     print("\n\n" + res)
   input("\n\nPress enter to quit.")
