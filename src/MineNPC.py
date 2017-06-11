@@ -1,3 +1,5 @@
+# © Copyright BluCode 2017 #
+
 from random import randint
 import sys
 try:
